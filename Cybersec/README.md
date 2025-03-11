@@ -1,0 +1,1 @@
+This folder is reserved for everything related to basic cybersecurity ranging from breaking conventional algortithms all the way to creating a MITM socket.
