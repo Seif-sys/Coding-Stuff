@@ -1,0 +1,2 @@
+break_mono.py: breaking the monoalphabetic encryption method using the english frequency 
+send_packet: custom TCP packet sender using raw sockets, which can be used to send various types of packets (SYN, XMAS, FIN, NULL).
