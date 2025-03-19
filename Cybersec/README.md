@@ -4,4 +4,3 @@ This folder is reserved for everything related to basic cybersecurity ranging fr
 ./encryption-decryption: codes for encryption/decryption methods (vigenere, monoalphabetic ...etc)
 
 ./break: breaking the respective algorithms from the previous file 
-***********
