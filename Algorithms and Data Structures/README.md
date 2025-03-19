@@ -1,0 +1,1 @@
+This repository is for basic data structures; be it binary trees, linked lists and all the way to more complex structures like AVL trees and graphs with BFS and DFS algorithms
