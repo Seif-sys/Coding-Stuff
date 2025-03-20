@@ -2,19 +2,16 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// Node definition
 typedef struct Node {
     int key;
     struct Node* left;
     struct Node* right;
 } Node;
 
-// BinarySearchTree definition
 typedef struct {
     Node* root;
 } BinarySearchTree;
 
-// Create a new node
 Node* create_node(int key) {
     Node* new_node = (Node*)malloc(sizeof(Node));
     new_node->key = key;
@@ -23,14 +20,12 @@ Node* create_node(int key) {
     return new_node;
 }
 
-// Initialize the BST
 BinarySearchTree* create_bst() {
     BinarySearchTree* bst = (BinarySearchTree*)malloc(sizeof(BinarySearchTree));
     bst->root = NULL;
     return bst;
 }
 
-// Insert helper
 Node* insert_node(Node* root, int key) {
     if (root == NULL) return create_node(key);
     if (key < root->key)
@@ -40,12 +35,10 @@ Node* insert_node(Node* root, int key) {
     return root;
 }
 
-// Insert into BST
 void insert(BinarySearchTree* bst, int key) {
     bst->root = insert_node(bst->root, key);
 }
 
-// Search helper
 bool search_node(Node* root, int key) {
     if (root == NULL) return false;
     if (key == root->key) return true;
@@ -54,12 +47,10 @@ bool search_node(Node* root, int key) {
     return search_node(root->right, key);
 }
 
-// Search in BST
 bool search(BinarySearchTree* bst, int key) {
     return search_node(bst->root, key);
 }
 
-// Find minimum node
 Node* min_value_node(Node* node) {
     Node* current = node;
     while (current && current->left != NULL)
@@ -67,7 +58,6 @@ Node* min_value_node(Node* node) {
     return current;
 }
 
-// Delete helper
 Node* delete_node(Node* root, int key) {
     if (root == NULL) return root;
 
@@ -96,13 +86,11 @@ Node* delete_node(Node* root, int key) {
     return root;
 }
 
-// Delete from BST
 void delete(BinarySearchTree* bst, int key) {
     bst->root = delete_node(bst->root, key);
 }
 
-// Inorder traversal helper
-void inorder_node(Node* root) {
+void inorder_node(Node* root) { //helper function for inorder
     if (root != NULL) {
         inorder_node(root->left);
         printf("%d ", root->key);
@@ -110,7 +98,6 @@ void inorder_node(Node* root) {
     }
 }
 
-// Inorder traversal
 void inorder(BinarySearchTree* bst) {
     inorder_node(bst->root);
     printf("\n");
