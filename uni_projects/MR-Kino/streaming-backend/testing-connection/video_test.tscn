@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://e2fp7h1pybyb"]
+
+[ext_resource type="Script" uid="uid://kmixt2wbt3aw" path="res://video_test.gd" id="1_gju0y"]
+
+[node name="VideoTest" type="Node2D"]
+script = ExtResource("1_gju0y")
+
+[node name="VideoPlayer1" type="VideoStreamPlayer" parent="."]
+offset_right = 140.0
+offset_bottom = 68.0
+
+[node name="VideoPlayer2" type="VideoStreamPlayer" parent="."]
+offset_right = 140.0
+offset_bottom = 68.0
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
