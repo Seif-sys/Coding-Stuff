@@ -1,0 +1,11 @@
+Model Information:
+* title:	Wooden Planks Texture (Flat Low Poly Style)
+* source:	https://sketchfab.com/3d-models/wooden-planks-texture-flat-low-poly-style-bc5774b49c7f428bb1dd55f07b153892
+* author:	Tiko (https://sketchfab.com/tikoavp)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Wooden Planks Texture (Flat Low Poly Style)" (https://sketchfab.com/3d-models/wooden-planks-texture-flat-low-poly-style-bc5774b49c7f428bb1dd55f07b153892) by Tiko (https://sketchfab.com/tikoavp) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
