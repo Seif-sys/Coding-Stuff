@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/maze_mat.mat.meta
+guid: 1b9d6334a29edcd458de867de5d015f0
+========
+guid: 853e0c3845c9e6c479bb61b5f896ac67
+>>>>>>>> hadil-audio:Assets/Materials/KeyMaterial.mat.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

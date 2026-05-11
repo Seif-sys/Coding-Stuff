@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Test_ProjectorHomography.unity
+    guid: bbe9ca6fdc13bf3ccb80fa3da11bf576
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 3fc7cafc09eaa7044a2405467b664daa
+  - enabled: 1
+    path: Assets/Scenes/Window.unity
+    guid: f968ba41d04d74f4b8180abf3fffc5bc
+  - enabled: 1
+    path: Assets/Scenes/Merge.unity
+    guid: 38bbd071d1144e744bf65d799d559674
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 96d2d057d106338448bbab9597ce35fe
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 654602120a0210046a5079296b4d7479, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 097bcbe49a6f0e24a8e010c468e7d33a, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: b54b5df356e72804b96255d720fe0aba, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 82048b6db0d5d984189b6bf3a0497b82, type: 2}
+  m_UseUCBPForAssetBundles: 0
