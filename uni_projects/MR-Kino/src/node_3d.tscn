@@ -1,0 +1,335 @@
+[gd_scene load_steps=11 format=3 uid="uid://cl11b3xb3liow"]
+
+[ext_resource type="Script" uid="uid://cxr8lu6xn5lwy" path="res://canvas_layer.gd" id="2_noarx"]
+
+[sub_resource type="GDScript" id="GDScript_a0tk4"]
+script/source = "extends Node3D
+
+
+func _ready():
+	var xr_interface = XRServer.find_interface(\"OpenXR\")
+	XRServer.primary_interface = xr_interface
+	xr_interface.initialize()
+	
+	# Aktiviere Passthrough über Projekteinstellungen (optional)
+	print(\"OpenXR initialisiert mit Passthrough\")
+"
+
+[sub_resource type="Environment" id="Environment_4xowi"]
+background_mode = 3
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a202f"]
+viewport_path = NodePath("MenuPlane/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jka67"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(1, 1, 0.105882, 0)
+albedo_texture = SubResource("ViewportTexture_a202f")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i5arm"]
+material = SubResource("StandardMaterial3D_jka67")
+size = Vector2(4, 4)
+
+[sub_resource type="GDScript" id="GDScript_a202f"]
+
+[sub_resource type="Theme" id="Theme_a202f"]
+
+[sub_resource type="Theme" id="Theme_noarx"]
+
+[sub_resource type="GDScript" id="GDScript_noarx"]
+script/source = "extends Button
+"
+
+[node name="Node3D" type="Node3D"]
+script = SubResource("GDScript_a0tk4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4xowi")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036868, 0.640464, 0.592159)
+
+[node name="XRController3D" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+
+[node name="XRController3D2" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="MenuPlane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.01918, -0.999816, 0, 0.999816, -0.01918, 0.0733757, 0.400559, -2.81738)
+mesh = SubResource("PlaneMesh_i5arm")
+script = SubResource("GDScript_a202f")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="MenuPlane"]
+script = ExtResource("2_noarx")
+
+[node name="ControlMain" type="Control" parent="MenuPlane/CanvasLayer"]
+layout_mode = 3
+anchor_right = 16.111
+anchor_bottom = 17.988
+offset_left = 76.0
+offset_top = 118.0
+offset_right = -17331.9
+offset_bottom = -10890.2
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.923932, 0.703984)
+
+[node name="LineEdit" type="LineEdit" parent="MenuPlane/CanvasLayer/ControlMain"]
+layout_mode = 0
+offset_left = 278.0
+offset_top = -33.0
+offset_right = 860.0
+offset_bottom = 112.0
+alignment = 1
+
+[node name="ButtonFilm" type="Button" parent="MenuPlane/CanvasLayer/ControlMain"]
+layout_mode = 0
+offset_left = 270.583
+offset_top = 142.049
+offset_right = 859.583
+offset_bottom = 267.049
+scale = Vector2(1.00783, 1.40803)
+theme = SubResource("Theme_a202f")
+theme_override_colors/font_disabled_color = Color(0.921569, 0.921569, 0.92549, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 55.249, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 70.718, 20.994, 1)
+text = "Film aussuchen"
+
+[node name="ButtonQuit" type="Button" parent="MenuPlane/CanvasLayer/ControlMain"]
+layout_mode = 0
+offset_left = 458.908
+offset_top = 329.553
+offset_right = 633.908
+offset_bottom = 483.553
+scale = Vector2(1.01301, 1.07085)
+theme = SubResource("Theme_noarx")
+theme_override_colors/font_disabled_color = Color(72.376, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 79.006, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 65.746, 48.619, 1)
+text = "Quit"
+
+[node name="ControlFilmwahl" type="Control" parent="MenuPlane/CanvasLayer"]
+layout_mode = 3
+anchor_right = 0.038
+anchor_bottom = 0.039
+offset_right = 1100.22
+offset_bottom = 620.728
+
+[node name="FilmButtonContainer" type="VBoxContainer" parent="MenuPlane/CanvasLayer/ControlFilmwahl"]
+layout_mode = 0
+offset_left = 395.0
+offset_top = 103.0
+offset_right = 748.0
+offset_bottom = 330.0
+
+[node name="ButtonReturnToMain" type="Button" parent="MenuPlane/CanvasLayer/ControlFilmwahl"]
+layout_mode = 0
+offset_left = 465.0
+offset_top = 383.0
+offset_right = 695.0
+offset_bottom = 456.0
+text = "Return"
+
+[node name="ControlSzene" type="Control" parent="MenuPlane/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 21.0
+offset_top = 33.0
+offset_right = 1153.0
+offset_bottom = 638.0
+
+[node name="ButtonMixedReality" type="Button" parent="MenuPlane/CanvasLayer/ControlSzene"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 87.0
+offset_right = 799.0
+offset_bottom = 200.0
+text = "Mixed Reality"
+
+[node name="ButtonKinoVR" type="Button" parent="MenuPlane/CanvasLayer/ControlSzene"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 207.0
+offset_right = 795.0
+offset_bottom = 311.0
+text = "Kino VR"
+
+[node name="ButtonWohnzimmerVR" type="Button" parent="MenuPlane/CanvasLayer/ControlSzene"]
+layout_mode = 0
+offset_left = 321.0
+offset_top = 318.0
+offset_right = 796.0
+offset_bottom = 421.0
+text = "Whonzimmer VR"
+
+[node name="ButtonReturnToFilmwahl" type="Button" parent="MenuPlane/CanvasLayer/ControlSzene"]
+layout_mode = 0
+offset_left = 449.0
+offset_top = 436.0
+offset_right = 649.0
+offset_bottom = 507.0
+text = "Return"
+
+[node name="ControlStart" type="Control" parent="MenuPlane/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LabelName" type="Label" parent="MenuPlane/CanvasLayer/ControlStart"]
+layout_mode = 2
+offset_left = 245.0
+offset_top = 15.0
+offset_right = 915.0
+offset_bottom = 117.0
+text = "
+"
+horizontal_alignment = 1
+
+[node name="LabelFilm" type="Label" parent="MenuPlane/CanvasLayer/ControlStart"]
+layout_mode = 2
+offset_left = 253.0
+offset_top = 124.0
+offset_right = 917.0
+offset_bottom = 218.0
+text = "
+Film:"
+horizontal_alignment = 1
+
+[node name="LabelSzene" type="Label" parent="MenuPlane/CanvasLayer/ControlStart"]
+layout_mode = 2
+offset_left = 245.0
+offset_top = 230.0
+offset_right = 898.0
+offset_bottom = 328.0
+text = "
+Scene:"
+horizontal_alignment = 1
+
+[node name="ButtonStartLobby" type="Button" parent="MenuPlane/CanvasLayer/ControlStart"]
+layout_mode = 2
+offset_left = 242.0
+offset_top = 362.0
+offset_right = 944.0
+offset_bottom = 503.0
+text = "Mit Freunden schauen"
+
+[node name="ButtonReturnToSzene" type="Button" parent="MenuPlane/CanvasLayer/ControlStart"]
+layout_mode = 2
+offset_left = 381.0
+offset_top = 536.0
+offset_right = 807.0
+offset_bottom = 604.0
+text = "return"
+
+[node name="ControlLobby" type="Control" parent="MenuPlane/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 13.0
+offset_top = 6.0
+offset_right = 1174.0
+offset_bottom = 648.0
+
+[node name="LabelNameList" type="Label" parent="MenuPlane/CanvasLayer/ControlLobby"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 51.0
+offset_right = 614.0
+offset_bottom = 359.0
+text = "die namen sind "
+
+[node name="LabelReadyStatus" type="Label" parent="MenuPlane/CanvasLayer/ControlLobby"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 339.0
+offset_right = 614.0
+offset_bottom = 634.0
+
+[node name="ButtonReady" type="Button" parent="MenuPlane/CanvasLayer/ControlLobby"]
+layout_mode = 0
+offset_left = 765.0
+offset_top = 134.0
+offset_right = 1024.0
+offset_bottom = 247.0
+text = "Bereit"
+
+[node name="ButtonReturnToStart" type="Button" parent="MenuPlane/CanvasLayer/ControlLobby"]
+layout_mode = 0
+offset_left = 785.0
+offset_top = 286.0
+offset_right = 1014.0
+offset_bottom = 379.0
+text = "return"
+
+[node name="ButtonWeiter" type="Button" parent="MenuPlane/CanvasLayer/ControlLobby"]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 553.0
+offset_right = 1132.0
+offset_bottom = 618.0
+disabled = true
+text = "Weiter"
+
+[node name="ControlFinalStart" type="Control" parent="MenuPlane/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1160.0
+offset_bottom = 646.0
+
+[node name="LabelFilmSzene" type="Label" parent="MenuPlane/CanvasLayer/ControlFinalStart"]
+layout_mode = 0
+offset_left = 351.0
+offset_top = 156.0
+offset_right = 980.0
+offset_bottom = 239.0
+
+[node name="LabelInfo" type="Label" parent="MenuPlane/CanvasLayer/ControlFinalStart"]
+layout_mode = 0
+offset_left = 371.0
+offset_top = 289.0
+offset_right = 775.0
+offset_bottom = 370.0
+text = "🕶️ Let’s go – dein Film wartet schon!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelErgebnis" type="Label" parent="MenuPlane/CanvasLayer/ControlFinalStart"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 31.0
+offset_right = 99.0
+offset_bottom = 54.0
+text = "Ergebnis:"
+
+[node name="ButtonStartFilm" type="Button" parent="MenuPlane/CanvasLayer/ControlFinalStart"]
+layout_mode = 0
+offset_left = 373.0
+offset_top = 416.0
+offset_right = 804.0
+offset_bottom = 510.0
+text = "🎬 Film starten🎬"
+script = SubResource("GDScript_noarx")
+
+[node name="ButtonReturnToLobby" type="Button" parent="MenuPlane/CanvasLayer/ControlFinalStart"]
+layout_mode = 0
+offset_left = 491.0
+offset_top = 523.0
+offset_right = 694.0
+offset_bottom = 582.0
+text = "return"
+
+[node name="HTTPRequestMovies" type="HTTPRequest" parent="MenuPlane/CanvasLayer"]
+
+[node name="SubViewport" type="SubViewport" parent="MenuPlane"]
+transparent_bg = true
+size = Vector2i(500, 500)
+render_target_update_mode = 4
+
+[connection signal="pressed" from="MenuPlane/CanvasLayer/ControlFinalStart/ButtonStartFilm" to="MenuPlane/CanvasLayer" method="_on_button_start_film_pressed"]
+[connection signal="pressed" from="MenuPlane/CanvasLayer/ControlFinalStart/ButtonReturnToLobby" to="MenuPlane/CanvasLayer" method="_on_button_return_to_lobby_pressed"]

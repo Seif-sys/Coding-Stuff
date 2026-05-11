@@ -1,0 +1,121 @@
+[gd_scene load_steps=14 format=3 uid="uid://dycpjltyarqdm"]
+
+[ext_resource type="PackedScene" uid="uid://clls4qe4ewfql" path="res://xr_origin_3d.tscn" id="1_ibsm1"]
+[ext_resource type="Script" uid="uid://bdjfusfdmucxo" path="res://mixed_reality.gd" id="1_vcinf"]
+[ext_resource type="Script" uid="uid://db5d0j5hdcdap" path="res://node_2d.gd" id="4_ksruc"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="4_nskmf"]
+[ext_resource type="PackedScene" uid="uid://cqycdt7n8vwaq" path="res://grabbable.tscn" id="4_vcinf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nskmf"]
+size = Vector3(3, 0.1, 3)
+
+[sub_resource type="Environment" id="Environment_tsg5x"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vcinf"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_q7766"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wekw3"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nskmf"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_q7766")
+emission_enabled = true
+emission_energy_multiplier = 1.5
+emission_texture = SubResource("ViewportTexture_wekw3")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8mlnn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vcinf"]
+size = Vector3(3, 1.6, 0.2)
+
+[node name="Mixed-Reality" type="Node3D"]
+script = ExtResource("1_vcinf")
+
+[node name="XROrigin3D" parent="." instance=ExtResource("1_ibsm1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.081523, 0, -0.0209658)
+
+[node name="XRCamera3D2" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="LeftController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="XRController3D2" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+
+[node name="Table" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.814156, -0.959354)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
+shape = SubResource("BoxShape3D_nskmf")
+
+[node name="grabbable" parent="Table" instance=ExtResource("4_vcinf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.328106, 0.112671, 0.623144)
+
+[node name="grabbable2" parent="Table" instance=ExtResource("4_vcinf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0607828, 0.112671, 0.392548)
+
+[node name="grabbable3" parent="Table" instance=ExtResource("4_vcinf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0358462, 0.573214, 0.623144)
+
+[node name="grabbable4" parent="Table" instance=ExtResource("4_vcinf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0358462, 0.826773, 0.623144)
+
+[node name="grabbable5" parent="Table" instance=ExtResource("4_vcinf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19446, 0.826773, 0.623144)
+
+[node name="grabbable6" parent="Table" instance=ExtResource("4_vcinf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.373256, 0.826773, 0.623144)
+
+[node name="Table2" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.0130254, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table2"]
+shape = SubResource("BoxShape3D_nskmf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tsg5x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4.78517, 0.739838)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.94027, 0.340429, 0, -0.340429, 0.94027, 0, 2.63759, 2.25681)
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.50888, 0, 0, 0, -0.0507429, -0.800497, 0, 3.75118, -0.0108285, -0.071839, 1.45063, -3.12678)
+mesh = SubResource("PlaneMesh_vcinf")
+skeleton = NodePath("../SubViewport")
+surface_material_override/0 = SubResource("StandardMaterial3D_nskmf")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Node2D" type="Node2D" parent="SubViewport"]
+script = ExtResource("4_ksruc")
+
+[node name="VideoPlayer1" type="VideoStreamPlayer" parent="SubViewport/Node2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VideoPlayer2" type="VideoStreamPlayer" parent="SubViewport/Node2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HTTPRequest" type="HTTPRequest" parent="SubViewport/Node2D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49644, -3)
+physics_material_override = SubResource("PhysicsMaterial_8mlnn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0684512, -0.0488938, -0.105909)
+shape = SubResource("BoxShape3D_vcinf")
+
+[node name="StartXR" parent="." instance=ExtResource("4_nskmf")]
+enable_passthrough = true

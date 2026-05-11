@@ -1,0 +1,259 @@
+[gd_scene format=3 uid="uid://3i2wbyodu0el"]
+
+[ext_resource type="Script" uid="uid://cxr8lu6xn5lwy" path="res://canvas_layer.gd" id="1_v2lfg"]
+
+[sub_resource type="Theme" id="Theme_tg4cr"]
+
+[sub_resource type="Theme" id="Theme_37rai"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1063840649]
+script = ExtResource("1_v2lfg")
+
+[node name="ControlMain" type="Control" parent="." unique_id=262398372]
+layout_mode = 3
+anchor_right = 16.111
+anchor_bottom = 17.988
+offset_left = 76.0
+offset_top = 118.0
+offset_right = -17331.9
+offset_bottom = -10890.2
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.923932, 0.703984)
+
+[node name="Label" type="Label" parent="ControlMain" unique_id=236647071]
+layout_mode = 0
+offset_left = 446.0
+offset_top = -58.0
+offset_right = 696.0
+offset_bottom = 76.0
+text = "Name eingeben bitte"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonFilm" type="Button" parent="ControlMain" unique_id=517309949]
+layout_mode = 0
+offset_left = 229.454
+offset_top = 188.925
+offset_right = 860.454
+offset_bottom = 332.925
+scale = Vector2(1.00783, 1.40803)
+theme = SubResource("Theme_tg4cr")
+theme_override_colors/font_hover_color = Color(0, 70.718, 20.994, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 55.249, 0, 1)
+theme_override_colors/font_disabled_color = Color(0.921569, 0.921569, 0.92549, 1)
+text = "Film aussuchen"
+
+[node name="ButtonQuit" type="Button" parent="ControlMain" unique_id=468599700]
+layout_mode = 0
+offset_left = 469.732
+offset_top = 399.157
+offset_right = 644.732
+offset_bottom = 553.157
+scale = Vector2(1.01301, 1.07085)
+theme = SubResource("Theme_37rai")
+theme_override_colors/font_hover_color = Color(0, 65.746, 48.619, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 79.006, 0, 1)
+theme_override_colors/font_disabled_color = Color(72.376, 0, 0, 1)
+text = "Quit"
+
+[node name="LineEdit" type="LineEdit" parent="ControlMain" unique_id=1912618966]
+layout_mode = 0
+offset_left = 388.557
+offset_top = 89.4907
+offset_right = 724.557
+offset_bottom = 161.49
+alignment = 1
+
+[node name="ControlFilmwahl" type="Control" parent="." unique_id=923274344]
+layout_mode = 3
+anchor_right = 0.038
+anchor_bottom = 0.039
+offset_right = 1100.22
+offset_bottom = 620.728
+
+[node name="FilmButtonContainer" type="VBoxContainer" parent="ControlFilmwahl" unique_id=697463352]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 49.0
+offset_right = 1009.0
+offset_bottom = 473.0
+
+[node name="ButtonReturnToMain" type="Button" parent="ControlFilmwahl" unique_id=286324047]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 527.0
+offset_right = 706.0
+offset_bottom = 600.0
+text = "Return"
+
+[node name="ControlSzene" type="Control" parent="." unique_id=121908484]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 21.0
+offset_top = 33.0
+offset_right = 1153.0
+offset_bottom = 638.0
+
+[node name="ButtonMixedReality" type="Button" parent="ControlSzene" unique_id=1908392445]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 87.0
+offset_right = 799.0
+offset_bottom = 200.0
+text = "Mixed Reality"
+
+[node name="ButtonKinoVR" type="Button" parent="ControlSzene" unique_id=619322069]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 207.0
+offset_right = 795.0
+offset_bottom = 311.0
+text = "Kino VR"
+
+[node name="ButtonWohnzimmerVR" type="Button" parent="ControlSzene" unique_id=1641218562]
+layout_mode = 0
+offset_left = 321.0
+offset_top = 318.0
+offset_right = 796.0
+offset_bottom = 421.0
+text = "Whonzimmer VR"
+
+[node name="ButtonReturnToFilmwahl" type="Button" parent="ControlSzene" unique_id=2129634235]
+layout_mode = 0
+offset_left = 449.0
+offset_top = 436.0
+offset_right = 649.0
+offset_bottom = 507.0
+text = "Return"
+
+[node name="ControlStart" type="Control" parent="." unique_id=1367162947]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -5.0
+offset_top = -3.0
+offset_right = 1141.0
+offset_bottom = 641.0
+
+[node name="ButtonStartLobby" type="Button" parent="ControlStart" unique_id=1355395323]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 312.0
+offset_right = 856.0
+offset_bottom = 437.0
+text = "Start lobby"
+
+[node name="ButtonReturnToSzene" type="Button" parent="ControlStart" unique_id=363822368]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 466.0
+offset_right = 686.0
+offset_bottom = 563.0
+text = "return"
+
+[node name="LabelName" type="Label" parent="ControlStart" unique_id=1353777489]
+layout_mode = 0
+offset_left = 427.0
+offset_top = 51.0
+offset_right = 686.0
+offset_bottom = 104.0
+
+[node name="LabelFilm" type="Label" parent="ControlStart" unique_id=2134958225]
+layout_mode = 0
+offset_left = 435.0
+offset_top = 126.0
+offset_right = 666.0
+offset_bottom = 196.0
+
+[node name="LabelSzene" type="Label" parent="ControlStart" unique_id=874298214]
+layout_mode = 0
+offset_left = 452.0
+offset_top = 221.0
+offset_right = 681.0
+offset_bottom = 304.0
+
+[node name="ControlLobby" type="Control" parent="." unique_id=139286582]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -5.0
+offset_top = -3.0
+offset_right = 1141.0
+offset_bottom = 641.0
+
+[node name="LabelNameList" type="Label" parent="ControlLobby" unique_id=1105760854]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 109.0
+offset_right = 723.0
+offset_bottom = 469.0
+
+[node name="LabelReadyStatus" type="Label" parent="ControlLobby" unique_id=996262009]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 560.0
+offset_right = 540.0
+offset_bottom = 642.0
+
+[node name="ButtonReady" type="Button" parent="ControlLobby" unique_id=564510029]
+layout_mode = 0
+offset_left = 769.0
+offset_top = 215.0
+offset_right = 1050.0
+offset_bottom = 333.0
+text = "bereit"
+
+[node name="ButtonWeiter" type="Button" parent="ControlLobby" unique_id=567763761]
+layout_mode = 0
+offset_left = 627.0
+offset_top = 558.0
+offset_right = 1143.0
+offset_bottom = 648.0
+text = "Weiter"
+
+[node name="ButtonReturnToStart" type="Button" parent="ControlLobby" unique_id=467228621]
+layout_mode = 0
+offset_left = 798.0
+offset_top = 350.0
+offset_right = 1036.0
+offset_bottom = 447.0
+text = "return"
+
+[node name="ControlFinalStart" type="Control" parent="." unique_id=458395448]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -5.0
+offset_top = -3.0
+offset_right = 1141.0
+offset_bottom = 641.0
+
+[node name="LabelFilmSzene" type="Label" parent="ControlFinalStart" unique_id=1027482880]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 56.0
+offset_right = 736.0
+offset_bottom = 159.0
+
+[node name="LabelInfo" type="Label" parent="ControlFinalStart" unique_id=1718318079]
+layout_mode = 0
+offset_left = 397.0
+offset_top = 192.0
+offset_right = 765.0
+offset_bottom = 283.0
+
+[node name="ButtonStartFilm" type="Button" parent="ControlFinalStart" unique_id=36738527]
+layout_mode = 0
+offset_left = 301.0
+offset_top = 397.0
+offset_right = 873.0
+offset_bottom = 522.0
+text = "Start"
+
+[node name="ButtonReturnToLobby" type="Button" parent="ControlFinalStart" unique_id=213349028]
+layout_mode = 0
+offset_left = 459.0
+offset_top = 533.0
+offset_right = 697.0
+offset_bottom = 630.0
+text = "return "
+
+[node name="HTTPRequestMovies" type="HTTPRequest" parent="." unique_id=1496344824]
