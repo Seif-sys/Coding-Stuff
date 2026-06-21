@@ -159,7 +159,7 @@ def plot_gap_curve():
 # =============================================================================
 
 def plot_coral_gain():
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9, 4))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9, 5))
 
     coral_angles = sorted(CORAL.keys())
     x = np.arange(len(coral_angles))
