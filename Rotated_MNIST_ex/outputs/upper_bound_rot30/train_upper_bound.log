@@ -1,0 +1,108 @@
+22:00:29  Device : cuda
+22:00:29  Args   : {'source_ckpt': './checkpoints/source_rot30/best_model.pt', 'data_root': './data', 'source_color_prob': 0.99, 'target_color_prob': 0.1, 'binary_labels': False, 'tgt_val_fraction': 0.15, 'backbone': 'cnn', 'feat_dim': 256, 'pretrained': False, 'freeze_encoder': False, 'epochs': 20, 'batch_size': 64, 'lr': 0.0001, 'dropout': 0.3, 'seed': 42, 'num_workers': 2, 'source_angle': 0, 'target_angle': 30, 'dataset': 'colored_mnist', 'output_dir': './outputs/upper_bound_rot30'}
+22:00:29  NOTE: This is the supervised upper bound. Target labels ARE used.
+22:00:29  Target fine-tune train: 51000  |  val: 9000  |  test: 10000
+22:00:29  Loaded source checkpoint: ./checkpoints/source_rot30/best_model.pt
+22:00:29  Trainable params: 621,322
+22:00:29  
+Epoch 1/20
+22:00:46    train  loss=0.1279  acc=0.9701
+22:00:54    val    loss=0.0577  acc=0.9858
+22:00:54    -> New best val acc=0.9858. Checkpoint saved.
+22:01:01  
+Epoch 2/20
+22:01:22    train  loss=0.0480  acc=0.9872
+22:01:31    val    loss=0.0409  acc=0.9887
+22:01:31    -> New best val acc=0.9887. Checkpoint saved.
+22:01:40  
+Epoch 3/20
+22:01:58    train  loss=0.0315  acc=0.9902
+22:02:07    val    loss=0.0341  acc=0.9899
+22:02:07    -> New best val acc=0.9899. Checkpoint saved.
+22:02:14  
+Epoch 4/20
+22:02:33    train  loss=0.0237  acc=0.9928
+22:02:43    val    loss=0.0312  acc=0.9906
+22:02:43    -> New best val acc=0.9906. Checkpoint saved.
+22:02:49  
+Epoch 5/20
+22:03:07    train  loss=0.0189  acc=0.9938
+22:03:16    val    loss=0.0289  acc=0.9913
+22:03:16    -> New best val acc=0.9913. Checkpoint saved.
+22:03:22  
+Epoch 6/20
+22:03:40    train  loss=0.0153  acc=0.9952
+22:03:49    val    loss=0.0282  acc=0.9920
+22:03:49    -> New best val acc=0.9920. Checkpoint saved.
+22:03:55  
+Epoch 7/20
+22:04:14    train  loss=0.0117  acc=0.9964
+22:04:23    val    loss=0.0249  acc=0.9928
+22:04:23    -> New best val acc=0.9928. Checkpoint saved.
+22:04:29  
+Epoch 8/20
+22:04:48    train  loss=0.0105  acc=0.9965
+22:04:56    val    loss=0.0266  acc=0.9922
+22:05:02  
+Epoch 9/20
+22:05:21    train  loss=0.0082  acc=0.9977
+22:05:30    val    loss=0.0239  acc=0.9926
+22:05:36  
+Epoch 10/20
+22:05:55    train  loss=0.0074  acc=0.9980
+22:06:03    val    loss=0.0243  acc=0.9926
+22:06:09  
+Epoch 11/20
+22:06:28    train  loss=0.0071  acc=0.9980
+22:06:37    val    loss=0.0237  acc=0.9927
+22:06:43  
+Epoch 12/20
+22:07:03    train  loss=0.0055  acc=0.9985
+22:07:12    val    loss=0.0240  acc=0.9929
+22:07:12    -> New best val acc=0.9929. Checkpoint saved.
+22:07:18  
+Epoch 13/20
+22:07:36    train  loss=0.0055  acc=0.9986
+22:07:46    val    loss=0.0232  acc=0.9930
+22:07:46    -> New best val acc=0.9930. Checkpoint saved.
+22:07:52  
+Epoch 14/20
+22:08:09    train  loss=0.0045  acc=0.9990
+22:08:20    val    loss=0.0228  acc=0.9929
+22:08:25  
+Epoch 15/20
+22:08:42    train  loss=0.0044  acc=0.9986
+22:08:53    val    loss=0.0231  acc=0.9930
+22:08:58  
+Epoch 16/20
+22:09:15    train  loss=0.0040  acc=0.9991
+22:09:26    val    loss=0.0233  acc=0.9928
+22:09:32  
+Epoch 17/20
+22:09:49    train  loss=0.0042  acc=0.9989
+22:10:00    val    loss=0.0229  acc=0.9928
+22:10:06  
+Epoch 18/20
+22:10:22    train  loss=0.0034  acc=0.9992
+22:10:33    val    loss=0.0227  acc=0.9932
+22:10:33    -> New best val acc=0.9932. Checkpoint saved.
+22:10:39  
+Epoch 19/20
+22:10:56    train  loss=0.0038  acc=0.9988
+22:11:06    val    loss=0.0232  acc=0.9933
+22:11:06    -> New best val acc=0.9933. Checkpoint saved.
+22:11:13  
+Epoch 20/20
+22:11:29    train  loss=0.0036  acc=0.9991
+22:11:38    val    loss=0.0230  acc=0.9933
+22:11:43  
+Fine-tuning complete in 11.2 min
+22:11:43  
+=== Final Evaluation (best checkpoint) ===
+22:11:53  Source test accuracy        : 0.9583  (sanity — may drop after fine-tune)
+22:11:53  Target test accuracy (UB)   : 0.9935
+22:11:53  Per-class target acc        : [0.998, 0.998, 0.99, 0.996, 0.994, 0.993, 0.992, 0.994, 0.992, 0.987]
+22:11:53  
+Results saved to  ./outputs/upper_bound_rot30\results_summary.txt
+22:11:53  Best checkpoint   ./outputs/upper_bound_rot30\best_model.pt
+22:11:53  Metrics CSV       ./outputs/upper_bound_rot30\metrics.csv

@@ -1,0 +1,18 @@
+=== Supervised Upper Bound ===
+NOTE: target labels used for fine-tuning. NOT a UDA method.
+
+backbone:            cnn
+source_ckpt:         ./checkpoints/source_rot75/best_model.pt
+freeze_encoder:      False
+seed:                42
+target_color_prob:   0.1
+epochs:              20
+lr:                  0.0001
+batch_size:          64
+tgt_val_fraction:    0.15
+training_time_min:   11.6
+device:              cuda
+
+source_test_acc:     0.6775
+target_test_acc_UB:  0.9924
+per_class_tgt_acc:   [0.993, 1.0, 0.991, 0.995, 0.995, 0.991, 0.985, 0.993, 0.989, 0.99]

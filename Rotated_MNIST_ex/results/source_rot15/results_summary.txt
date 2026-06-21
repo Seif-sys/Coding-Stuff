@@ -1,0 +1,14 @@
+backbone:            cnn
+seed:                42
+source_color_prob:   0.99
+target_color_prob:   0.1
+epochs:              20
+lr:                  0.001
+batch_size:          64
+training_time_min:   8.8
+device:              cuda
+
+source_test_acc:     0.9948
+target_test_acc:     0.9841
+domain_gap:          0.0107
+per_class_tgt_acc:   [0.997, 0.995, 0.967, 0.983, 0.987, 0.984, 0.981, 0.981, 0.989, 0.977]

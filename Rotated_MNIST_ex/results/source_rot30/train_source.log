@@ -1,0 +1,214 @@
+00:36:04  Device: cuda
+00:36:04  Args: {'data_root': './data', 'source_color_prob': 0.99, 'target_color_prob': 0.1, 'binary_labels': False, 'backbone': 'cnn', 'feat_dim': 256, 'pretrained': False, 'epochs': 20, 'batch_size': 64, 'lr': 0.001, 'dropout': 0.3, 'seed': 42, 'num_workers': 2, 'source_angle': 0, 'target_angle': 30, 'results_dir': './results/source_rot30', 'checkpoints_dir': './checkpoints/source_rot'}
+00:36:04  Model: cnn  params=621,322
+00:36:04  
+Epoch 1/20
+00:36:18    train  loss=0.0896  acc=0.9763
+00:36:25    val    loss=0.0422  acc=0.9877
+00:36:25    -> New best val acc=0.9877. Checkpoint saved.
+00:36:30  
+Epoch 2/20
+00:36:43    train  loss=0.0365  acc=0.9888
+00:36:50    val    loss=0.0319  acc=0.9905
+00:36:50    -> New best val acc=0.9905. Checkpoint saved.
+00:36:55  
+Epoch 3/20
+00:37:08    train  loss=0.0277  acc=0.9910
+00:37:15    val    loss=0.0311  acc=0.9905
+00:37:20  
+Epoch 4/20
+00:37:33    train  loss=0.0211  acc=0.9936
+00:37:40    val    loss=0.0267  acc=0.9918
+00:37:40    -> New best val acc=0.9918. Checkpoint saved.
+00:37:45  
+Epoch 5/20
+00:37:58    train  loss=0.0178  acc=0.9943
+00:38:05    val    loss=0.0298  acc=0.9918
+00:38:10  
+Epoch 6/20
+00:38:23    train  loss=0.0141  acc=0.9959
+00:38:30    val    loss=0.0267  acc=0.9920
+00:38:30    -> New best val acc=0.9920. Checkpoint saved.
+00:38:35  
+Epoch 7/20
+00:38:48    train  loss=0.0118  acc=0.9961
+00:38:55    val    loss=0.0210  acc=0.9930
+00:38:55    -> New best val acc=0.9930. Checkpoint saved.
+00:39:00  
+Epoch 8/20
+00:39:13    train  loss=0.0093  acc=0.9970
+00:39:20    val    loss=0.0243  acc=0.9937
+00:39:20    -> New best val acc=0.9937. Checkpoint saved.
+00:39:24  
+Epoch 9/20
+00:39:38    train  loss=0.0076  acc=0.9974
+00:39:44    val    loss=0.0243  acc=0.9927
+00:39:49  
+Epoch 10/20
+00:40:03    train  loss=0.0043  acc=0.9986
+00:40:09    val    loss=0.0313  acc=0.9927
+00:40:14  
+Epoch 11/20
+00:40:28    train  loss=0.0032  acc=0.9990
+00:40:34    val    loss=0.0244  acc=0.9932
+00:40:39  
+Epoch 12/20
+00:40:53    train  loss=0.0035  acc=0.9989
+00:40:59    val    loss=0.0288  acc=0.9938
+00:40:59    -> New best val acc=0.9938. Checkpoint saved.
+00:41:04  
+Epoch 13/20
+00:41:17    train  loss=0.0026  acc=0.9992
+00:41:24    val    loss=0.0244  acc=0.9943
+00:41:24    -> New best val acc=0.9943. Checkpoint saved.
+00:41:30  
+Epoch 14/20
+00:41:44    train  loss=0.0015  acc=0.9996
+00:41:50    val    loss=0.0232  acc=0.9947
+00:41:50    -> New best val acc=0.9947. Checkpoint saved.
+00:41:55  
+Epoch 15/20
+00:42:09    train  loss=0.0013  acc=0.9996
+00:42:15    val    loss=0.0210  acc=0.9945
+00:42:20  
+Epoch 16/20
+00:42:34    train  loss=0.0006  acc=0.9999
+00:42:40    val    loss=0.0239  acc=0.9945
+00:42:45  
+Epoch 17/20
+00:42:58    train  loss=0.0006  acc=0.9999
+00:43:05    val    loss=0.0249  acc=0.9945
+00:43:10  
+Epoch 18/20
+00:43:23    train  loss=0.0003  acc=1.0000
+00:43:30    val    loss=0.0239  acc=0.9950
+00:43:30    -> New best val acc=0.9950. Checkpoint saved.
+00:43:35  
+Epoch 19/20
+00:43:49    train  loss=0.0003  acc=1.0000
+00:43:55    val    loss=0.0231  acc=0.9952
+00:43:55    -> New best val acc=0.9952. Checkpoint saved.
+00:44:00  
+Epoch 20/20
+00:44:13    train  loss=0.0003  acc=1.0000
+00:44:20    val    loss=0.0241  acc=0.9952
+00:44:25  
+Training complete in 8.3 min
+00:44:25  
+=== Final Evaluation (best checkpoint) ===
+00:44:34  Source test accuracy : 0.9948
+00:44:34  Target test accuracy : 0.8953
+00:44:34  Per-class target acc : [0.994, 0.987, 0.846, 0.904, 0.796, 0.887, 0.932, 0.744, 0.939, 0.919]
+00:44:34  Gap (src - tgt)      : 0.0995
+00:44:34  Seed: 42
+00:44:34  
+Results saved to   ./results/source_rot30\results_summary.txt
+00:44:34  Best checkpoint    ./checkpoints/source_rot\best_model.pt
+00:44:34  Metrics CSV        ./results/source_rot30\metrics.csv
+20:15:34  Device: cuda
+20:15:34  Args: {'data_root': './data', 'source_color_prob': 0.99, 'target_color_prob': 0.1, 'binary_labels': False, 'backbone': 'cnn', 'feat_dim': 256, 'pretrained': False, 'epochs': 20, 'batch_size': 64, 'lr': 0.001, 'dropout': 0.3, 'seed': 42, 'num_workers': 2, 'source_angle': 0, 'target_angle': 30, 'results_dir': './results/source_rot30', 'checkpoints_dir': './checkpoints/source_rot30'}
+20:15:34  Model: cnn  params=621,322
+20:15:34  
+Epoch 1/20
+20:15:48    train  loss=0.0896  acc=0.9763
+20:15:55    val    loss=0.0422  acc=0.9877
+20:15:55    -> New best val acc=0.9877. Checkpoint saved.
+20:16:00  
+Epoch 2/20
+20:16:15    train  loss=0.0365  acc=0.9888
+20:16:23    val    loss=0.0319  acc=0.9905
+20:16:23    -> New best val acc=0.9905. Checkpoint saved.
+20:16:28  
+Epoch 3/20
+20:16:42    train  loss=0.0277  acc=0.9910
+20:16:49    val    loss=0.0311  acc=0.9905
+20:16:55  
+Epoch 4/20
+20:17:09    train  loss=0.0211  acc=0.9936
+20:17:16    val    loss=0.0267  acc=0.9918
+20:17:16    -> New best val acc=0.9918. Checkpoint saved.
+20:17:21  
+Epoch 5/20
+20:17:35    train  loss=0.0178  acc=0.9943
+20:17:43    val    loss=0.0298  acc=0.9918
+20:17:48  
+Epoch 6/20
+20:18:02    train  loss=0.0141  acc=0.9959
+20:18:09    val    loss=0.0267  acc=0.9920
+20:18:09    -> New best val acc=0.9920. Checkpoint saved.
+20:18:15  
+Epoch 7/20
+20:18:28    train  loss=0.0118  acc=0.9961
+20:18:35    val    loss=0.0210  acc=0.9930
+20:18:35    -> New best val acc=0.9930. Checkpoint saved.
+20:18:41  
+Epoch 8/20
+20:18:55    train  loss=0.0093  acc=0.9970
+20:19:03    val    loss=0.0243  acc=0.9937
+20:19:03    -> New best val acc=0.9937. Checkpoint saved.
+20:19:08  
+Epoch 9/20
+20:19:24    train  loss=0.0076  acc=0.9974
+20:19:32    val    loss=0.0243  acc=0.9927
+20:19:37  
+Epoch 10/20
+20:19:52    train  loss=0.0043  acc=0.9986
+20:20:00    val    loss=0.0313  acc=0.9927
+20:20:05  
+Epoch 11/20
+20:20:20    train  loss=0.0032  acc=0.9990
+20:20:28    val    loss=0.0244  acc=0.9932
+20:20:33  
+Epoch 12/20
+20:20:47    train  loss=0.0035  acc=0.9989
+20:20:55    val    loss=0.0288  acc=0.9938
+20:20:55    -> New best val acc=0.9938. Checkpoint saved.
+20:21:00  
+Epoch 13/20
+20:21:14    train  loss=0.0026  acc=0.9992
+20:21:21    val    loss=0.0244  acc=0.9943
+20:21:21    -> New best val acc=0.9943. Checkpoint saved.
+20:21:26  
+Epoch 14/20
+20:21:40    train  loss=0.0015  acc=0.9996
+20:21:48    val    loss=0.0232  acc=0.9947
+20:21:48    -> New best val acc=0.9947. Checkpoint saved.
+20:21:53  
+Epoch 15/20
+20:22:07    train  loss=0.0013  acc=0.9996
+20:22:15    val    loss=0.0210  acc=0.9945
+20:22:20  
+Epoch 16/20
+20:22:37    train  loss=0.0006  acc=0.9999
+20:22:45    val    loss=0.0239  acc=0.9945
+20:22:50  
+Epoch 17/20
+20:23:05    train  loss=0.0006  acc=0.9999
+20:23:12    val    loss=0.0249  acc=0.9945
+20:23:17  
+Epoch 18/20
+20:23:31    train  loss=0.0003  acc=1.0000
+20:23:38    val    loss=0.0239  acc=0.9950
+20:23:38    -> New best val acc=0.9950. Checkpoint saved.
+20:23:44  
+Epoch 19/20
+20:23:58    train  loss=0.0003  acc=1.0000
+20:24:05    val    loss=0.0231  acc=0.9952
+20:24:05    -> New best val acc=0.9952. Checkpoint saved.
+20:24:10  
+Epoch 20/20
+20:24:24    train  loss=0.0003  acc=1.0000
+20:24:31    val    loss=0.0241  acc=0.9952
+20:24:36  
+Training complete in 9.0 min
+20:24:36  
+=== Final Evaluation (best checkpoint) ===
+20:24:47  Source test accuracy : 0.9948
+20:24:47  Target test accuracy : 0.8953
+20:24:47  Per-class target acc : [0.994, 0.987, 0.846, 0.904, 0.796, 0.887, 0.932, 0.744, 0.939, 0.919]
+20:24:47  Gap (src - tgt)      : 0.0995
+20:24:47  Seed: 42
+20:24:47  
+Results saved to   ./results/source_rot30\results_summary.txt
+20:24:47  Best checkpoint    ./checkpoints/source_rot30\best_model.pt
+20:24:47  Metrics CSV        ./results/source_rot30\metrics.csv

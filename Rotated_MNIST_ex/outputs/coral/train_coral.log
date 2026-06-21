@@ -1,0 +1,43 @@
+21:53:32  Device       : cuda
+21:53:32  Args         : {'source_ckpt': './checkpoints/source_rot30/best_model.pt', 'data_root': './data', 'source_color_prob': 0.99, 'target_color_prob': 0.1, 'binary_labels': False, 'backbone': 'cnn', 'feat_dim': 256, 'pretrained': False, 'dropout': 0.3, 'lambda_coral': 1.0, 'dataset': 'colored_mnist', 'epochs': 20, 'batch_size': 64, 'lr': 0.001, 'seed': 42, 'num_workers': 2, 'source_angle': 0, 'target_angle': 15, 'output_dir': './outputs/coral'}
+21:53:32  UDA method   : Deep CORAL — target labels NOT used during training.
+21:53:32  Loaded source checkpoint: ./checkpoints/source_rot30/best_model.pt
+21:53:43  
+Before adaptation:
+21:53:43    Source test acc : 0.9948
+21:53:43    Target test acc : 0.9841  <-- source-only baseline
+21:53:43  
+Epoch 1/20  [lambda_coral=1.0]
+21:54:00    train  total=0.0139  ce=0.0087  coral=0.0052  src_acc=0.9972
+21:54:08    val    loss=0.0316  acc=0.9908
+21:54:08    -> New best val acc=0.9908. Checkpoint saved.
+21:54:13  
+Epoch 2/20  [lambda_coral=1.0]
+21:56:21  Device       : cuda
+21:56:21  Args         : {'source_ckpt': './checkpoints/source_rot30/best_model.pt', 'data_root': './data', 'source_color_prob': 0.99, 'target_color_prob': 0.1, 'binary_labels': False, 'backbone': 'cnn', 'feat_dim': 256, 'pretrained': False, 'dropout': 0.3, 'lambda_coral': 1.0, 'dataset': 'colored_mnist', 'epochs': 20, 'batch_size': 64, 'lr': 0.001, 'seed': 42, 'num_workers': 2, 'source_angle': 0, 'target_angle': 30, 'output_dir': './outputs/coral'}
+21:56:21  UDA method   : Deep CORAL — target labels NOT used during training.
+21:56:22  Loaded source checkpoint: ./checkpoints/source_rot30/best_model.pt
+21:56:31  
+Before adaptation:
+21:56:31    Source test acc : 0.9948
+21:56:31    Target test acc : 0.8953  <-- source-only baseline
+21:56:31  
+Epoch 1/20  [lambda_coral=1.0]
+21:56:47    train  total=0.0141  ce=0.0085  coral=0.0056  src_acc=0.9971
+21:56:55    val    loss=0.0324  acc=0.9913
+21:56:55    -> New best val acc=0.9913. Checkpoint saved.
+21:57:00  
+Epoch 2/20  [lambda_coral=1.0]
+21:57:17    train  total=0.0110  ce=0.0070  coral=0.0040  src_acc=0.9978
+21:57:24    val    loss=0.0283  acc=0.9930
+21:57:24    -> New best val acc=0.9930. Checkpoint saved.
+21:57:29  
+Epoch 3/20  [lambda_coral=1.0]
+21:57:45    train  total=0.0089  ce=0.0059  coral=0.0031  src_acc=0.9981
+21:57:53    val    loss=0.0277  acc=0.9923
+21:57:58  
+Epoch 4/20  [lambda_coral=1.0]
+21:58:14    train  total=0.0074  ce=0.0049  coral=0.0025  src_acc=0.9985
+21:58:22    val    loss=0.0265  acc=0.9928
+21:58:26  
+Epoch 5/20  [lambda_coral=1.0]

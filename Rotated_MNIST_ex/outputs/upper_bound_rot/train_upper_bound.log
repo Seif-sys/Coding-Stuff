@@ -1,0 +1,9 @@
+21:56:51  Device : cuda
+21:56:51  Args   : {'source_ckpt': './checkpoints/source_rot30/best_model.pt', 'data_root': './data', 'source_color_prob': 0.99, 'target_color_prob': 0.1, 'binary_labels': False, 'tgt_val_fraction': 0.15, 'backbone': 'cnn', 'feat_dim': 256, 'pretrained': False, 'freeze_encoder': False, 'epochs': 20, 'batch_size': 64, 'lr': 0.0001, 'dropout': 0.3, 'seed': 42, 'num_workers': 2, 'source_angle': 0, 'target_angle': 30, 'dataset': 'colored_mnist', 'output_dir': './outputs/upper_bound_rot'}
+21:56:51  NOTE: This is the supervised upper bound. Target labels ARE used.
+21:56:51  Target fine-tune train: 51000  |  val: 9000  |  test: 10000
+21:56:51  Loaded source checkpoint: ./checkpoints/source_rot30/best_model.pt
+21:56:51  Trainable params: 621,322
+21:56:51  
+Epoch 1/20
+21:57:06    train  loss=0.1279  acc=0.9701

@@ -1,0 +1,135 @@
+14:49:30  Device       : cuda
+14:49:30  Args         : {'source_ckpt': './checkpoints/source_rot60/best_model.pt', 'data_root': './data', 'source_color_prob': 0.99, 'target_color_prob': 0.1, 'binary_labels': False, 'backbone': 'cnn', 'feat_dim': 256, 'pretrained': False, 'dropout': 0.3, 'lambda_coral': 1.0, 'dataset': 'colored_mnist', 'epochs': 20, 'batch_size': 64, 'lr': 0.001, 'seed': 42, 'num_workers': 2, 'source_angle': 0, 'target_angle': 60, 'output_dir': './outputs/coral_rot60'}
+14:49:30  UDA method   : Deep CORAL — target labels NOT used during training.
+14:49:31  Loaded source checkpoint: ./checkpoints/source_rot60/best_model.pt
+14:49:41  
+Before adaptation:
+14:49:41    Source test acc : 0.9948
+14:49:41    Target test acc : 0.3807  <-- source-only baseline
+14:49:41  
+Epoch 1/20  [lambda_coral=1.0]
+14:49:57    train  total=0.0138  ce=0.0080  coral=0.0058  src_acc=0.9972
+14:50:05    val    loss=0.0362  acc=0.9898
+14:50:05    -> New best val acc=0.9898. Checkpoint saved.
+14:50:09  
+Epoch 2/20  [lambda_coral=1.0]
+14:50:26    train  total=0.0124  ce=0.0083  coral=0.0041  src_acc=0.9971
+14:50:35    val    loss=0.0327  acc=0.9912
+14:50:35    -> New best val acc=0.9912. Checkpoint saved.
+14:50:41  
+Epoch 3/20  [lambda_coral=1.0]
+14:51:01    train  total=0.0079  ce=0.0048  coral=0.0031  src_acc=0.9986
+14:51:10    val    loss=0.0255  acc=0.9937
+14:51:10    -> New best val acc=0.9937. Checkpoint saved.
+14:51:16  
+Epoch 4/20  [lambda_coral=1.0]
+14:51:38    train  total=0.0073  ce=0.0048  coral=0.0025  src_acc=0.9985
+14:51:48    val    loss=0.0236  acc=0.9930
+14:51:54  
+Epoch 5/20  [lambda_coral=1.0]
+14:52:14    train  total=0.0071  ce=0.0050  coral=0.0021  src_acc=0.9982
+14:52:23    val    loss=0.0320  acc=0.9917
+14:52:29  
+Epoch 6/20  [lambda_coral=1.0]
+14:52:48    train  total=0.0059  ce=0.0040  coral=0.0019  src_acc=0.9989
+14:52:58    val    loss=0.0273  acc=0.9935
+14:53:04  
+Epoch 7/20  [lambda_coral=1.0]
+14:53:23    train  total=0.0041  ce=0.0025  coral=0.0016  src_acc=0.9993
+14:53:33    val    loss=0.0262  acc=0.9938
+14:53:33    -> New best val acc=0.9938. Checkpoint saved.
+14:53:39  
+Epoch 8/20  [lambda_coral=1.0]
+14:53:59    train  total=0.0042  ce=0.0028  coral=0.0015  src_acc=0.9992
+14:54:08    val    loss=0.0261  acc=0.9943
+14:54:08    -> New best val acc=0.9943. Checkpoint saved.
+14:54:14  
+Epoch 9/20  [lambda_coral=1.0]
+14:54:33    train  total=0.0035  ce=0.0021  coral=0.0013  src_acc=0.9994
+14:54:43    val    loss=0.0251  acc=0.9947
+14:54:43    -> New best val acc=0.9947. Checkpoint saved.
+14:54:48  
+Epoch 10/20  [lambda_coral=1.0]
+14:55:08    train  total=0.0026  ce=0.0014  coral=0.0012  src_acc=0.9996
+14:55:18    val    loss=0.0253  acc=0.9948
+14:55:18    -> New best val acc=0.9948. Checkpoint saved.
+14:55:23  
+Epoch 11/20  [lambda_coral=1.0]
+14:55:44    train  total=0.0023  ce=0.0013  coral=0.0011  src_acc=0.9997
+14:55:53    val    loss=0.0234  acc=0.9952
+14:55:53    -> New best val acc=0.9952. Checkpoint saved.
+14:55:59  
+Epoch 12/20  [lambda_coral=1.0]
+14:56:21    train  total=0.0017  ce=0.0008  coral=0.0010  src_acc=0.9999
+14:56:29    val    loss=0.0229  acc=0.9940
+14:56:36  
+Epoch 13/20  [lambda_coral=1.0]
+14:56:58    train  total=0.0015  ce=0.0006  coral=0.0009  src_acc=0.9999
+14:57:06    val    loss=0.0223  acc=0.9955
+14:57:06    -> New best val acc=0.9955. Checkpoint saved.
+14:57:13  
+Epoch 14/20  [lambda_coral=1.0]
+14:57:35    train  total=0.0012  ce=0.0004  coral=0.0008  src_acc=0.9999
+14:57:43    val    loss=0.0210  acc=0.9950
+14:57:49  
+Epoch 15/20  [lambda_coral=1.0]
+14:58:11    train  total=0.0010  ce=0.0003  coral=0.0008  src_acc=1.0000
+14:58:20    val    loss=0.0206  acc=0.9955
+14:58:26  
+Epoch 16/20  [lambda_coral=1.0]
+14:58:47    train  total=0.0009  ce=0.0002  coral=0.0007  src_acc=1.0000
+14:58:56    val    loss=0.0206  acc=0.9952
+14:59:02  
+Epoch 17/20  [lambda_coral=1.0]
+14:59:23    train  total=0.0009  ce=0.0002  coral=0.0007  src_acc=1.0000
+14:59:32    val    loss=0.0206  acc=0.9953
+14:59:38  
+Epoch 18/20  [lambda_coral=1.0]
+14:59:59    train  total=0.0008  ce=0.0002  coral=0.0006  src_acc=1.0000
+15:00:09    val    loss=0.0205  acc=0.9952
+15:00:15  
+Epoch 19/20  [lambda_coral=1.0]
+15:00:36    train  total=0.0008  ce=0.0002  coral=0.0006  src_acc=1.0000
+15:00:45    val    loss=0.0205  acc=0.9953
+15:00:51  
+Epoch 20/20  [lambda_coral=1.0]
+15:01:11    train  total=0.0008  ce=0.0002  coral=0.0006  src_acc=1.0000
+15:01:20    val    loss=0.0204  acc=0.9957
+15:01:20    -> New best val acc=0.9957. Checkpoint saved.
+15:01:26  
+Adaptation complete in 11.8 min
+15:01:26  
+=== Final Evaluation (best checkpoint) ===
+15:01:39  
+=======================================================
+15:01:39    Target test (after CORAL)
+15:01:39  =======================================================
+15:01:39    Loss     : 0.0000
+15:01:39    Accuracy : 0.4584  (45.84%)
+15:01:39  
+  Per-class accuracy:
+15:01:39  
+  Confusion matrix (rows=true, cols=pred):
+15:01:39                   0       1       2       3       4       5       6       7       8       9
+15:01:39      --------------------------------------------------------------------------------------
+15:01:39           0 |    949       2      10       1       0       1       2       1       9       5
+15:01:39           1 |      0     779     110       1      15       0      10     219       0       1
+15:01:39           2 |     68      72     168      25      65       1       1     320     292      20
+15:01:39           3 |     43       0       3     348      60      70      13     418       7      48
+15:01:39           4 |     16       8     473      70     162     100       5      49      89      10
+15:01:39           5 |     27       2       1       9      79     430     255      16       2      71
+15:01:39           6 |    301      11       9       7     185       2     386       2      46       9
+15:01:39           7 |     89     165      25       7     135      21       0     423       6     157
+15:01:39           8 |     33       4      11      14     184       8     163       4     405     148
+15:01:39           9 |    181       7      25       1      83     115      24       5      34     534
+15:01:39  =======================================================
+
+15:01:39  
+  Negative transfer check:
+15:01:39      Target acc before adaptation : 0.3807
+15:01:39      Target acc after  adaptation : 0.4584
+15:01:39      Delta                        : +0.0777
+15:01:39  
+Results saved to  ./outputs/coral_rot60\results_summary.txt
+15:01:39  Best checkpoint   ./outputs/coral_rot60\best_model.pt
+15:01:39  Metrics CSV       ./outputs/coral_rot60\metrics.csv
