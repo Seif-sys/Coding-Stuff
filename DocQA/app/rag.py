@@ -26,3 +26,4 @@ def top_chunks(text: str, question: str, k: int = 3, size: int = 400, overlap: i
     scores = cosine_similarity(vec.transform([question]), vec.transform(chunks))[0]
     best = scores.argsort()[::-1][:k]
     return [chunks[i] for i in best]
+

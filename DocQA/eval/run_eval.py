@@ -1,13 +1,3 @@
-""" 
-Measures how good the pipeline is: accuracy on eval/cases.json.
-
-Usage (from the project root):
-  python -m eval.run_eval --offline          # no API key: retrieval-only baseline
-  python -m eval.run_eval                    # real LLM, needs ANTHROPIC_API_KEY
-  python -m eval.run_eval --k 1 2 3 5        # compare several values of k
-  """
-
-
 import argparse
 import json
 from pathlib import Path

@@ -26,5 +26,5 @@ def health():
 def ask(req: AskRequest):
     try:
         return AskResponse(answer=pipeline.answer(req.text, req.question, req.k))
-    except Exception as exc:  # e.g. missing API key, network error
+    except Exception as exc:  # e.g. Ollama not running, model missing
         raise HTTPException(status_code=502, detail=f"LLM call failed: {exc}")
