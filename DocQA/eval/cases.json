@@ -1,0 +1,18 @@
+[
+  {"question": "Where was the Atlas rover built?", "expected": "Bremen"},
+  {"question": "When did the rover launch?", "expected": "14 March 2031"},
+  {"question": "How many days does the trip to Mars take?", "expected": "207"},
+  {"question": "In which crater does the rover land?", "expected": "Hesperia"},
+  {"question": "How many wheels does the rover have?", "expected": "six"},
+  {"question": "How heavy is the rover?", "expected": "640"},
+  {"question": "How much power does the nuclear battery deliver?", "expected": "110"},
+  {"question": "What is the main camera called?", "expected": "Argus"},
+  {"question": "How deep can the drill reach?", "expected": "2 metres"},
+  {"question": "Who leads the mission?", "expected": "Voss"},
+  {"question": "Where is the communications team based?", "expected": "Darmstadt"},
+  {"question": "Which satellite relays data to Earth?", "expected": "Hermes"},
+  {"question": "How long is the planned mission?", "expected": "687"},
+  {"question": "Which programming language is the onboard software mainly written in?", "expected": "Rust"},
+  {"question": "What is the mission budget?", "expected": "1.2 billion"},
+  {"question": "What colour is the rover?", "expected": "Not in the document"}
+]
