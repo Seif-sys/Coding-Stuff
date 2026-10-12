@@ -8,4 +8,4 @@ The main idea of the app is to connect multiple people through the headset to wa
 After launching the app the user/-s would be in a menu in an augmented reality environment where they can enter a lobby with other users and chose a movie with a basic voting system (majority takes it, in case of a tie random movie). When all viewers are ready they can chose a map from a list. The current state of the app offers 3 possible environments (also expandable), 2 fully virtual (either a living room or a movie theatre) and 3rd mixed reality one. The "screening" in both headsets is synchronized leaving a realistic experience for the viewers.
 
 ###
-We also set up an apache server were we stored the movies. The folder "streaming-backend" contains all the scripts from the setup, the chunking of the videos, and even testing before integrating in the main app.
+I also set up an apache server were we stored the movies. The folder "streaming-backend" contains all the scripts from the setup, the chunking of the videos, and even testing before integrating in the main app.
