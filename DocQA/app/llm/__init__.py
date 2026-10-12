@@ -8,6 +8,9 @@ def get_provider():
     if name == "ollama":
         from . import ollama
         return ollama
+    if name == "groq":
+            from . import groq
+            return groq
     raise ValueError(f"Unknown LLM_PROVIDER: {name!r}")
 
 
