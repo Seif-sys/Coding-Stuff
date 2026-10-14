@@ -42,3 +42,10 @@ def test_upload_rejects_too_large(monkeypatch):
     monkeypatch.setattr("app.main.MAX_BYTES", 10)
     r = upload(monkeypatch)
     assert r.status_code == 413
+
+def test_list_and_delete(monkeypatch):
+    doc_id = upload(monkeypatch).json()["doc_id"]
+    assert [d["doc_id"] for d in client.get("/documents").json()] == [doc_id]
+    assert client.delete(f"/documents/{doc_id}").status_code == 204
+    assert client.get("/documents").json() == []
+    assert client.delete(f"/documents/{doc_id}").status_code == 404
