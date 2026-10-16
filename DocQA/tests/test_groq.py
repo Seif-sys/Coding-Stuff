@@ -41,3 +41,4 @@ def test_factory_selects_groq(monkeypatch):
     from app import llm
     monkeypatch.setenv("LLM_PROVIDER", "groq")
     assert llm.get_provider() is groq
+    

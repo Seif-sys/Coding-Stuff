@@ -65,3 +65,4 @@ def test_ask_docs_llm_failure_is_502(monkeypatch):
     d = make_doc("a.pdf", [("some text", 1)])
     r = client.post("/ask", json={"question": "q?", "doc_ids": [d.id]})
     assert r.status_code == 502
+    

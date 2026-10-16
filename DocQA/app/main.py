@@ -1,18 +1,24 @@
-from fastapi import FastAPI, File, HTTPException, UploadFile
+import json
+
+from fastapi import Depends, FastAPI, File, HTTPException, UploadFile
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field, model_validator
 
 from . import pdf, pipeline, rag
-from .documents import Chunk, store
+from .documents import Chunk, Document, store
+from .ratelimit import rate_limit
 
 MAX_BYTES = 10 * 1024 * 1024  # 10 MB
+MAX_DOCS = 20
+MAX_PAGES = 300
 
 app = FastAPI(title="DocQA", description="Ask questions about a text with an LLM.")
 
 
 class AskRequest(BaseModel):
-    question: str = Field(min_length=1)
-    text: str | None = Field(default=None, min_length=1)         # old mode: raw text
-    doc_ids: list[str] | None = Field(default=None, min_length=1)  # new mode: uploaded documents
+    question: str = Field(min_length=1, max_length=1000)
+    text: str | None = Field(default=None, min_length=1, max_length=200_000)  # old mode: raw text
+    doc_ids: list[str] | None = Field(default=None, min_length=1, max_length=10)  # new mode: uploaded documents
     k: int = Field(default=3, ge=1, le=10)  # how many chunks to give the LLM
 
     @model_validator(mode="after")
@@ -40,13 +46,36 @@ class DocumentInfo(BaseModel):
     n_chunks: int
 
 
+def _resolve_docs(doc_ids: list[str]) -> list[Document]:
+    docs = []
+    for doc_id in dict.fromkeys(doc_ids):  # de-duplicate, keep order
+        doc = store.get(doc_id)
+        if doc is None:
+            raise HTTPException(status_code=404, detail=f"Document not found: {doc_id}")
+        docs.append(doc)
+    return docs
+
+
+def _sources(top: list[tuple[Document, Chunk]]) -> list[Source]:
+    return [Source(doc_id=d.id, doc=d.filename, page=c.page, text=c.text) for d, c in top]
+
+
+def _sse(event: str, data) -> str:
+    return f"event: {event}\ndata: {json.dumps(data)}\n\n"
+
+
 @app.get("/health")
 def health():
     """Used by Docker/monitoring to check the service is alive."""
     return {"ok": True}
 
 
-@app.post("/ask", response_model=AskResponse, response_model_exclude_none=True)
+@app.post(
+    "/ask",
+    response_model=AskResponse,
+    response_model_exclude_none=True,
+    dependencies=[Depends(rate_limit)],
+)
 def ask(req: AskRequest):
     if req.doc_ids is None:
         try:
@@ -54,24 +83,48 @@ def ask(req: AskRequest):
         except Exception as exc:  # e.g. Ollama not running, model missing
             raise HTTPException(status_code=502, detail=f"LLM call failed: {exc}")
 
-    docs = []
-    for doc_id in dict.fromkeys(req.doc_ids):  # de-duplicate, keep order
-        doc = store.get(doc_id)
-        if doc is None:
-            raise HTTPException(status_code=404, detail=f"Document not found: {doc_id}")
-        docs.append(doc)
+    docs = _resolve_docs(req.doc_ids)
     try:
         answer, top = pipeline.answer_docs(docs, req.question, req.k)
     except Exception as exc:
         raise HTTPException(status_code=502, detail=f"LLM call failed: {exc}")
-    return AskResponse(
-        answer=answer,
-        sources=[Source(doc_id=d.id, doc=d.filename, page=c.page, text=c.text) for d, c in top],
+    return AskResponse(answer=answer, sources=_sources(top))
+
+
+@app.post("/ask/stream", dependencies=[Depends(rate_limit)])
+def ask_stream(req: AskRequest):
+    docs = _resolve_docs(req.doc_ids) if req.doc_ids is not None else None  # 404 before streaming starts
+
+    def events():
+        try:
+            if docs is None:
+                tokens = pipeline.stream_text(req.text, req.question, req.k)
+            else:
+                tokens, top = pipeline.stream_docs(docs, req.question, req.k)
+                yield _sse("sources", [s.model_dump() for s in _sources(top)])
+            for piece in tokens:
+                yield _sse("token", piece)
+        except Exception as exc:
+            yield _sse("error", f"LLM call failed: {exc}")
+            return
+        yield _sse("done", {})
+
+    return StreamingResponse(
+        events(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
 
 
-@app.post("/documents", response_model=DocumentInfo, status_code=201)
+@app.post(
+    "/documents",
+    response_model=DocumentInfo,
+    status_code=201,
+    dependencies=[Depends(rate_limit)],
+)
 async def upload_document(file: UploadFile = File(...)):
+    if len(store.list()) >= MAX_DOCS:
+        raise HTTPException(status_code=409, detail=f"Document limit reached (max {MAX_DOCS}). Delete one first.")
     name = file.filename or "document.pdf"
     data = await file.read(MAX_BYTES + 1)
     if len(data) > MAX_BYTES:
@@ -82,6 +135,8 @@ async def upload_document(file: UploadFile = File(...)):
         pages = pdf.extract_pages(data)
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc))
+    if len(pages) > MAX_PAGES:
+        raise HTTPException(status_code=413, detail=f"PDF too long (max {MAX_PAGES} pages).")
     chunks = [
         Chunk(text=c, page=page_no)
         for page_no, page_text in enumerate(pages, start=1)

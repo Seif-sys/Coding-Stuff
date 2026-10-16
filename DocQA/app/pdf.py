@@ -11,3 +11,4 @@ def extract_pages(data: bytes) -> list[str]:
         return [(page.extract_text() or "") for page in reader.pages]
     except PdfReadError as exc:
         raise ValueError("Could not read the PDF.") from exc
+    

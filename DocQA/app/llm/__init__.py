@@ -16,3 +16,6 @@ def get_provider():
 
 def complete(prompt: str, max_tokens: int = 500) -> str:
     return get_provider().complete(prompt, max_tokens)
+
+def stream(prompt: str, max_tokens: int = 500):
+    return get_provider().stream(prompt, max_tokens)
