@@ -1,5 +1,5 @@
 from fastapi import FastAPI, File, HTTPException, UploadFile
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 from . import pdf, pipeline, rag
 from .documents import Chunk, store
@@ -11,12 +11,27 @@ app = FastAPI(title="DocQA", description="Ask questions about a text with an LLM
 
 class AskRequest(BaseModel):
     question: str = Field(min_length=1)
-    text: str = Field(min_length=1)
+    text: str | None = Field(default=None, min_length=1)         # old mode: raw text
+    doc_ids: list[str] | None = Field(default=None, min_length=1)  # new mode: uploaded documents
     k: int = Field(default=3, ge=1, le=10)  # how many chunks to give the LLM
+
+    @model_validator(mode="after")
+    def exactly_one_input(self):
+        if (self.text is None) == (self.doc_ids is None):
+            raise ValueError("Provide either 'text' or 'doc_ids'.")
+        return self
+
+
+class Source(BaseModel):
+    doc_id: str
+    doc: str
+    page: int
+    text: str
 
 
 class AskResponse(BaseModel):
     answer: str
+    sources: list[Source] | None = None  # only set in doc_ids mode
 
 
 class DocumentInfo(BaseModel):
@@ -31,12 +46,28 @@ def health():
     return {"ok": True}
 
 
-@app.post("/ask", response_model=AskResponse)
+@app.post("/ask", response_model=AskResponse, response_model_exclude_none=True)
 def ask(req: AskRequest):
+    if req.doc_ids is None:
+        try:
+            return AskResponse(answer=pipeline.answer(req.text, req.question, req.k))
+        except Exception as exc:  # e.g. Ollama not running, model missing
+            raise HTTPException(status_code=502, detail=f"LLM call failed: {exc}")
+
+    docs = []
+    for doc_id in dict.fromkeys(req.doc_ids):  # de-duplicate, keep order
+        doc = store.get(doc_id)
+        if doc is None:
+            raise HTTPException(status_code=404, detail=f"Document not found: {doc_id}")
+        docs.append(doc)
     try:
-        return AskResponse(answer=pipeline.answer(req.text, req.question, req.k))
-    except Exception as exc:  # e.g. Ollama not running, model missing
+        answer, top = pipeline.answer_docs(docs, req.question, req.k)
+    except Exception as exc:
         raise HTTPException(status_code=502, detail=f"LLM call failed: {exc}")
+    return AskResponse(
+        answer=answer,
+        sources=[Source(doc_id=d.id, doc=d.filename, page=c.page, text=c.text) for d, c in top],
+    )
 
 
 @app.post("/documents", response_model=DocumentInfo, status_code=201)
