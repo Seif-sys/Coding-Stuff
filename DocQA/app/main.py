@@ -1,21 +1,24 @@
 import json
 
-from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field, model_validator
 
 from . import pdf, pipeline, rag
 from .documents import Chunk, Document, store
+from .ratelimit import rate_limit
 
 MAX_BYTES = 10 * 1024 * 1024  # 10 MB
+MAX_DOCS = 20
+MAX_PAGES = 300
 
 app = FastAPI(title="DocQA", description="Ask questions about a text with an LLM.")
 
 
 class AskRequest(BaseModel):
-    question: str = Field(min_length=1)
-    text: str | None = Field(default=None, min_length=1)         # old mode: raw text
-    doc_ids: list[str] | None = Field(default=None, min_length=1)  # new mode: uploaded documents
+    question: str = Field(min_length=1, max_length=1000)
+    text: str | None = Field(default=None, min_length=1, max_length=200_000)  # old mode: raw text
+    doc_ids: list[str] | None = Field(default=None, min_length=1, max_length=10)  # new mode: uploaded documents
     k: int = Field(default=3, ge=1, le=10)  # how many chunks to give the LLM
 
     @model_validator(mode="after")
@@ -67,7 +70,12 @@ def health():
     return {"ok": True}
 
 
-@app.post("/ask", response_model=AskResponse, response_model_exclude_none=True)
+@app.post(
+    "/ask",
+    response_model=AskResponse,
+    response_model_exclude_none=True,
+    dependencies=[Depends(rate_limit)],
+)
 def ask(req: AskRequest):
     if req.doc_ids is None:
         try:
@@ -83,7 +91,7 @@ def ask(req: AskRequest):
     return AskResponse(answer=answer, sources=_sources(top))
 
 
-@app.post("/ask/stream")
+@app.post("/ask/stream", dependencies=[Depends(rate_limit)])
 def ask_stream(req: AskRequest):
     docs = _resolve_docs(req.doc_ids) if req.doc_ids is not None else None  # 404 before streaming starts
 
@@ -108,8 +116,15 @@ def ask_stream(req: AskRequest):
     )
 
 
-@app.post("/documents", response_model=DocumentInfo, status_code=201)
+@app.post(
+    "/documents",
+    response_model=DocumentInfo,
+    status_code=201,
+    dependencies=[Depends(rate_limit)],
+)
 async def upload_document(file: UploadFile = File(...)):
+    if len(store.list()) >= MAX_DOCS:
+        raise HTTPException(status_code=409, detail=f"Document limit reached (max {MAX_DOCS}). Delete one first.")
     name = file.filename or "document.pdf"
     data = await file.read(MAX_BYTES + 1)
     if len(data) > MAX_BYTES:
@@ -120,6 +135,8 @@ async def upload_document(file: UploadFile = File(...)):
         pages = pdf.extract_pages(data)
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc))
+    if len(pages) > MAX_PAGES:
+        raise HTTPException(status_code=413, detail=f"PDF too long (max {MAX_PAGES} pages).")
     chunks = [
         Chunk(text=c, page=page_no)
         for page_no, page_text in enumerate(pages, start=1)
@@ -140,4 +157,3 @@ def list_documents():
 def delete_document(doc_id: str):
     if not store.delete(doc_id):
         raise HTTPException(status_code=404, detail="Document not found.")
-    
