@@ -49,3 +49,4 @@ def test_list_and_delete(monkeypatch):
     assert client.delete(f"/documents/{doc_id}").status_code == 204
     assert client.get("/documents").json() == []
     assert client.delete(f"/documents/{doc_id}").status_code == 404
+    

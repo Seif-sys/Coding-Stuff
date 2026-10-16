@@ -9,3 +9,4 @@ def test_add_get_delete():
     assert s.delete(doc.id) is True
     assert s.get(doc.id) is None
     assert s.delete(doc.id) is False
+    
