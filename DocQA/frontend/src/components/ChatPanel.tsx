@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
-import { ask } from '../api'
+import { askStream } from '../api'
 import type { Source } from '../api'
 
 interface Message {
   id: number
   question: string
-  answer?: string
+  answer: string
   sources?: Source[]
   error?: string
 }
@@ -21,24 +21,39 @@ export default function ChatPanel({ selected }: Props) {
   const [messages, setMessages] = useState<Message[]>([])
   const [question, setQuestion] = useState('')
   const [busy, setBusy] = useState(false)
+  const abortRef = useRef<AbortController | null>(null)
+
+  useEffect(() => () => abortRef.current?.abort(), [])
 
   const canAsk = !busy && selected.length > 0 && question.trim().length > 0
+
+  function patch(id: number, fn: (m: Message) => Message) {
+    setMessages((prev) => prev.map((m) => (m.id === id ? fn(m) : m)))
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (!canAsk) return
     const q = question.trim()
     const id = Date.now()
+    const controller = new AbortController()
+    abortRef.current = controller
+
     setQuestion('')
     setBusy(true)
-    setMessages((prev) => [...prev, { id, question: q }])
+    setMessages((prev) => [...prev, { id, question: q, answer: '' }])
     try {
-      const res = await ask(q, selected)
-      setMessages((prev) =>
-        prev.map((m) => (m.id === id ? { ...m, answer: res.answer, sources: res.sources } : m)),
+      await askStream(
+        q,
+        selected,
+        {
+          onSources: (sources) => patch(id, (m) => ({ ...m, sources })),
+          onToken: (token) => patch(id, (m) => ({ ...m, answer: m.answer + token })),
+        },
+        controller.signal,
       )
     } catch (err) {
-      setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, error: errMsg(err) } : m)))
+      if (!controller.signal.aborted) patch(id, (m) => ({ ...m, error: errMsg(err) }))
     } finally {
       setBusy(false)
     }
@@ -60,21 +75,24 @@ export default function ChatPanel({ selected }: Props) {
         <button type="submit" disabled={!canAsk}>
           {busy ? 'Thinking…' : 'Ask'}
         </button>
+        {busy && (
+          <>
+            {' '}
+            <button type="button" onClick={() => abortRef.current?.abort()}>
+              Stop
+            </button>
+          </>
+        )}
       </form>
       {messages.map((m) => (
         <div key={m.id}>
           <p>
             <strong>Q:</strong> {m.question}
           </p>
-          {m.error ? (
-            <p role="alert">{m.error}</p>
-          ) : m.answer !== undefined ? (
-            <p>
-              <strong>A:</strong> {m.answer}
-            </p>
-          ) : (
-            <p>…</p>
-          )}
+          <p>
+            <strong>A:</strong> {m.answer || (m.error ? '' : '…')}
+          </p>
+          {m.error && <p role="alert">{m.error}</p>}
         </div>
       ))}
     </section>

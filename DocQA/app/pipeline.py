@@ -9,8 +9,7 @@ If the context does not contain the answer, reply exactly: "Not in the document.
 Context:
 {context}
 
-Question: {question}
-Answer briefly."""
+Question: {question}"""
 
 
 def _prompt(context_chunks: list[str], question: str) -> str:
